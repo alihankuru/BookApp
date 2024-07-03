@@ -4,6 +4,7 @@ using BookApp.DataAccessLayer.Abstract;
 using BookApp.DataAccessLayer.Context;
 using BookApp.DataAccessLayer.EntityFramework;
 using BookApp.DataAccessLayer.UnitOfWork;
+using FluentValidation.AspNetCore;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +19,12 @@ builder.Services.AddScoped<IUowDal, UowDal>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-builder.Services.AddControllers();
+
+
+builder.Services.AddControllers().AddFluentValidation(x => {
+    x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

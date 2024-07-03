@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookApp.BusinessLayer.Abstract;
+using BookApp.BusinessLayer.Validators.ShelfLocationValidators;
 using BookApp.DtoLayer.ShelfLocation;
 using BookApp.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Http;
@@ -30,9 +31,12 @@ namespace BookApp.WebApi.Controllers
         [HttpPost]
         public IActionResult CreateShelfLocation(CreateShelfLocationDto createShelfLocationDto)
         {
-            if (!ModelState.IsValid)
+            CreateShelfLocationValidator validator = new CreateShelfLocationValidator();
+            var validatorResult=validator.Validate(createShelfLocationDto);
+
+            if (!validatorResult.IsValid)
             {
-                return BadRequest();
+                return BadRequest(validatorResult.Errors);
             }
             var values = _mapper.Map<ShelfLocation>(createShelfLocationDto);
             _shelfLocationService.TInsert(values);
