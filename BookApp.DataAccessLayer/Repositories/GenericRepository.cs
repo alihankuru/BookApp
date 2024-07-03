@@ -17,9 +17,11 @@ namespace BookApp.DataAccessLayer.Repositories
             _context = context;
         }
 
-        public void Delete(T t)
+        public void Delete(int id)
         {
-            _context.Remove(t); 
+            var value = _context.Set<T>().Find(id);
+            _context.Set<T>().Remove(value);
+
         }
 
         public T GetById(int id)

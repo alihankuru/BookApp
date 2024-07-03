@@ -10,7 +10,7 @@ namespace BookApp.DataAccessLayer.Abstract
     {
         void Insert(T t);
         void Update(T t);
-        void Delete(T t);
+        void Delete(int id);
         List<T> GetList();
         T GetById(int id);
         void MultiUpdate(List<T> t);

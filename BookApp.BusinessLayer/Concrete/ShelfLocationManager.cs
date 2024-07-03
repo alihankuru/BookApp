@@ -21,9 +21,9 @@ namespace BookApp.BusinessLayer.Concrete
             _uowDal = uowDal;
         }
 
-        public void TDelete(ShelfLocation t)
+        public void TDelete(int id)
         {
-            _shelfLocationDal.Delete(t);
+            _shelfLocationDal.Delete(id);
             _uowDal.Save();
         }
 

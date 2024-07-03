@@ -10,7 +10,7 @@ namespace BookApp.BusinessLayer.Abstract
     {
         void TInsert(T t);
         void TUpdate(T t);
-        void TDelete(T t);
+        void TDelete(int id);
         List<T> TGetList();
         T TGetById(int id);
         void TMultiUpdate(List<T> t);
