@@ -10,10 +10,4 @@
     <ProjectReference Include="..\BookApp.EntityLayer\BookApp.EntityLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Abstract\" />
-    <Folder Include="EntityFramework\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>

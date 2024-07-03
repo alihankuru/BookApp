@@ -10,9 +10,4 @@
     <ProjectReference Include="..\BookApp.DataAccessLayer\BookApp.DataAccessLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Abstract\" />
-    <Folder Include="Concrete\" />
-  </ItemGroup>
-
 </Project>
