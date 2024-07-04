@@ -2,6 +2,7 @@
 using BookApp.DtoLayer.Book;
 using BookApp.DtoLayer.BookNote;
 using BookApp.DtoLayer.Order;
+using BookApp.DtoLayer.OrderItem;
 using BookApp.DtoLayer.ShelfLocation;
 using BookApp.EntityLayer.Concrete;
 
@@ -31,6 +32,11 @@ namespace BookApp.WebApi.Mapping
             CreateMap<UpdateBookNoteDto, BookNote>().ReverseMap();
             CreateMap<GetByIdBookNoteDto, BookNote>().ReverseMap();
             CreateMap<ResultBookNoteDto, BookNote>().ReverseMap();
+
+            CreateMap<CreateOrderItemDto, OrderItem>().ReverseMap();
+            CreateMap<UpdateOrderItemDto, OrderItem>().ReverseMap();
+            CreateMap<GetByIdOrderItemDto, OrderItem>().ReverseMap();
+            CreateMap<ResultOrderItemDto, OrderItem>().ReverseMap();
 
         }
 
