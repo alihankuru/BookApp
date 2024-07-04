@@ -52,7 +52,7 @@ namespace BookApp.WebApi.Controllers
             _shelfLocationService.TInsert(shelfLocation);
 
             // Return Ok response
-            return Ok(new { message = "Create successful" });
+            return Ok();
         }
 
 
@@ -83,7 +83,7 @@ namespace BookApp.WebApi.Controllers
             var values = _mapper.Map<ShelfLocation>(updateShelfLocationDto);
             _shelfLocationService.TUpdate(values);
 
-            return StatusCode(200, new { message = "Update successful" });
+            return Ok();
         }
 
     }

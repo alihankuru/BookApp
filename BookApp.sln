@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookApp.BusinessLayer", "BookApp.BusinessLayer\BookApp.BusinessLayer.csproj", "{78FB7F3E-6247-484F-B86C-095E4AD264CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookApp.BusinessLayer", "BookApp.BusinessLayer\BookApp.BusinessLayer.csproj", "{78FB7F3E-6247-484F-B86C-095E4AD264CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookApp.DataAccessLayer", "BookApp.DataAccessLayer\BookApp.DataAccessLayer.csproj", "{3676564E-3340-4A7F-AAA5-5492CA6F4E05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookApp.DataAccessLayer", "BookApp.DataAccessLayer\BookApp.DataAccessLayer.csproj", "{3676564E-3340-4A7F-AAA5-5492CA6F4E05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookApp.DtoLayer", "BookApp.DtoLayer\BookApp.DtoLayer.csproj", "{5AEF03C4-B2C9-4AB5-89B3-C1E36C7C25F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookApp.DtoLayer", "BookApp.DtoLayer\BookApp.DtoLayer.csproj", "{5AEF03C4-B2C9-4AB5-89B3-C1E36C7C25F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookApp.EntityLayer", "BookApp.EntityLayer\BookApp.EntityLayer.csproj", "{FACC0804-4787-42E2-BC91-5F969E1048A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookApp.EntityLayer", "BookApp.EntityLayer\BookApp.EntityLayer.csproj", "{FACC0804-4787-42E2-BC91-5F969E1048A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookApp.WebApi", "BookApp.WebApi\BookApp.WebApi.csproj", "{C4833183-98D7-4E14-967F-4AEE9B7177EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookApp.WebApi", "BookApp.WebApi\BookApp.WebApi.csproj", "{C4833183-98D7-4E14-967F-4AEE9B7177EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookApp.Test", "BookApp.Test\BookApp.Test.csproj", "{BA0FAB30-12F7-433F-8D6D-F8C464563305}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C4833183-98D7-4E14-967F-4AEE9B7177EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4833183-98D7-4E14-967F-4AEE9B7177EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4833183-98D7-4E14-967F-4AEE9B7177EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA0FAB30-12F7-433F-8D6D-F8C464563305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA0FAB30-12F7-433F-8D6D-F8C464563305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA0FAB30-12F7-433F-8D6D-F8C464563305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA0FAB30-12F7-433F-8D6D-F8C464563305}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
