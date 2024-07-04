@@ -3,6 +3,7 @@ using BookApp.BusinessLayer.Abstract;
 using BookApp.BusinessLayer.Validators.ShelfLocationValidators;
 using BookApp.DtoLayer.ShelfLocation;
 using BookApp.EntityLayer.Concrete;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,11 +15,15 @@ namespace BookApp.WebApi.Controllers
     {
         private readonly IShelfLocationService _shelfLocationService;
         private readonly IMapper _mapper;
+        private readonly IValidator<CreateShelfLocationDto> _createShelfLocationValidator;
+        private readonly IValidator<UpdateShelfLocationDto> _updateShelfLocationValidator;
 
-        public ShelfLocationsController(IShelfLocationService shelfLocationService, IMapper mapper)
+        public ShelfLocationsController(IShelfLocationService shelfLocationService, IMapper mapper, IValidator<CreateShelfLocationDto> createShelfLocationValidator, IValidator<UpdateShelfLocationDto> updateShelfLocationValidator)
         {
             _shelfLocationService = shelfLocationService;
             _mapper = mapper;
+            _createShelfLocationValidator = createShelfLocationValidator;
+            _updateShelfLocationValidator = updateShelfLocationValidator;
         }
 
         [HttpGet]
@@ -28,20 +33,29 @@ namespace BookApp.WebApi.Controllers
             return Ok(values);
         }
 
+
         [HttpPost]
         public IActionResult CreateShelfLocation(CreateShelfLocationDto createShelfLocationDto)
         {
-            CreateShelfLocationValidator validator = new CreateShelfLocationValidator();
-            var validatorResult=validator.Validate(createShelfLocationDto);
+            var validatorResult = _createShelfLocationValidator.Validate(createShelfLocationDto);
 
             if (!validatorResult.IsValid)
             {
+                // If validation fails, return BadRequest with validation errors
                 return BadRequest(validatorResult.Errors);
             }
-            var values = _mapper.Map<ShelfLocation>(createShelfLocationDto);
-            _shelfLocationService.TInsert(values);
-            return StatusCode(200, new { message = "Create successful" });
+
+            // Mapping DTO to entity
+            var shelfLocation = _mapper.Map<ShelfLocation>(createShelfLocationDto);
+
+            // Assuming _shelfLocationService.TInsert() method handles insertion
+            _shelfLocationService.TInsert(shelfLocation);
+
+            // Return Ok response
+            return Ok(new { message = "Create successful" });
         }
+
+
 
         [HttpDelete("DeleteDestination/{id}")]
         public IActionResult DeleteShelfLocation(int id)
@@ -60,9 +74,11 @@ namespace BookApp.WebApi.Controllers
         [HttpPut]
         public IActionResult UpdateShelfLocation(UpdateShelfLocationDto updateShelfLocationDto)
         {
-            if (!ModelState.IsValid)
+            var validatorResult = _updateShelfLocationValidator.Validate(updateShelfLocationDto);
+
+            if (!validatorResult.IsValid)
             {
-                return BadRequest();
+                return BadRequest(validatorResult.Errors);
             }
             var values = _mapper.Map<ShelfLocation>(updateShelfLocationDto);
             _shelfLocationService.TUpdate(values);

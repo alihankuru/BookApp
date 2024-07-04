@@ -4,7 +4,7 @@ using BookApp.EntityLayer.Concrete;
 
 namespace BookApp.WebApi.Mapping
 {
-    public class AutoMapperConfig:Profile
+    public class AutoMapperConfig : Profile
     {
         public AutoMapperConfig()
         {

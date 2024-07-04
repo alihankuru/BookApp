@@ -1,4 +1,6 @@
-﻿using BookApp.BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BookApp.BusinessLayer.Abstract;
+using BookApp.BusinessLayer.Serilog;
 using BookApp.DataAccessLayer.Abstract;
 using BookApp.DataAccessLayer.UnitOfWork;
 using BookApp.EntityLayer.Concrete;
@@ -14,45 +16,105 @@ namespace BookApp.BusinessLayer.Concrete
     {
         private readonly IShelfLocationDal _shelfLocationDal;
         private readonly IUowDal _uowDal;
+        private readonly IAppLogger<ShelfLocation> _logger;
+        
 
-        public ShelfLocationManager(IShelfLocationDal shelfLocationDal, IUowDal uowDal)
+        public ShelfLocationManager(IShelfLocationDal shelfLocationDal, IUowDal uowDal, IAppLogger<ShelfLocation> logger)
         {
             _shelfLocationDal = shelfLocationDal;
             _uowDal = uowDal;
+            _logger = logger;
         }
 
         public void TDelete(int id)
         {
-            _shelfLocationDal.Delete(id);
-            _uowDal.Save();
+            try
+            {
+                _shelfLocationDal.Delete(id);
+                _uowDal.Save();
+                _logger.LogInformation($"ShelfLocation with ID {id} deleted successfully.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error deleting ShelfLocation with ID {id}: {ex.Message}");
+                throw;
+            }
         }
 
         public ShelfLocation TGetById(int id)
         {
-            return _shelfLocationDal.GetById(id);
+            try
+            {
+                var shelfLocation = _shelfLocationDal.GetById(id);
+                _logger.LogInformation($"ShelfLocation with ID {id} retrieved successfully.");
+                return shelfLocation;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error retrieving ShelfLocation with ID {id}: {ex.Message}");
+                throw;
+            }
         }
 
         public List<ShelfLocation> TGetList()
         {
-            return _shelfLocationDal.GetList();
+            try
+            {
+                var shelfLocations = _shelfLocationDal.GetList();
+                _logger.LogInformation("ShelfLocation list retrieved successfully.");
+                return shelfLocations;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error retrieving ShelfLocation list: {ex.Message}");
+                throw;
+            }
         }
 
-        public void TInsert(ShelfLocation t)
+        public void TInsert(ShelfLocation shelfLocation)
         {
-            _shelfLocationDal.Insert(t);
-            _uowDal.Save();
+            try
+            {
+                _shelfLocationDal.Insert(shelfLocation);
+                _uowDal.Save();
+                _logger.LogInformation($"ShelfLocation inserted successfully. ID: {shelfLocation.ShelfLocationId}");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error inserting ShelfLocation: {ex.Message}");
+                throw;
+            }
         }
 
-        public void TMultiUpdate(List<ShelfLocation> t)
+        public void TMultiUpdate(List<ShelfLocation> shelfLocation)
         {
-            _shelfLocationDal.MultiUpdate(t);
-            _uowDal.Save();
+            try
+            {
+                _shelfLocationDal.MultiUpdate(shelfLocation);
+                _uowDal.Save();
+                _logger.LogInformation("ShelfLocation list updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error updating ShelfLocation list: {ex.Message}");
+                throw;
+            }
         }
 
-        public void TUpdate(ShelfLocation t)
+        public void TUpdate(ShelfLocation shelfLocation)
         {
-            _shelfLocationDal.Update(t);
-            _uowDal.Save();
+            try
+            {
+                _shelfLocationDal.Update(shelfLocation);
+                _uowDal.Save();
+                _logger.LogInformation($"ShelfLocation with ID {shelfLocation.ShelfLocationId} updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error updating ShelfLocation with ID {shelfLocation.ShelfLocationId}: {ex.Message}");
+                throw;
+            }
         }
+
     }
 }
