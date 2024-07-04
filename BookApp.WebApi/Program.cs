@@ -5,6 +5,7 @@ using BookApp.BusinessLayer.Validators.BookNoteValidators;
 using BookApp.BusinessLayer.Validators.BookValidators;
 using BookApp.BusinessLayer.Validators.OrderItemValidators;
 using BookApp.BusinessLayer.Validators.OrderValidators;
+using BookApp.BusinessLayer.Validators.SharedNoteValidators;
 using BookApp.BusinessLayer.Validators.ShelfLocationValidators;
 using BookApp.DataAccessLayer.Abstract;
 using BookApp.DataAccessLayer.Context;
@@ -14,10 +15,12 @@ using BookApp.DtoLayer.Book;
 using BookApp.DtoLayer.BookNote;
 using BookApp.DtoLayer.Order;
 using BookApp.DtoLayer.OrderItem;
+using BookApp.DtoLayer.SharedNote;
 using BookApp.DtoLayer.ShelfLocation;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Serilog;
+using SharedNoteApp.BusinessLayer.Concrete;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,6 +53,9 @@ builder.Services.AddScoped<IBookNoteService, BookNoteManager>();
 builder.Services.AddScoped<IOrderItemDal, EfOrderItemDal>();
 builder.Services.AddScoped<IOrderItemService, OrderItemManager>();
 
+builder.Services.AddScoped<ISharedNoteDal, EfSharedNoteDal>();
+builder.Services.AddScoped<ISharedNoteService, SharedNoteManager>();
+
 builder.Services.AddScoped<IUowDal, UowDal>();
 
 
@@ -71,6 +77,8 @@ builder.Services.AddScoped<IValidator<UpdateBookNoteDto>, UpdateBookNoteValidato
 builder.Services.AddScoped<IValidator<CreateOrderItemDto>, CreateOrderItemValidator>();
 builder.Services.AddScoped<IValidator<UpdateOrderItemDto>, UpdateOrderItemValidator>();
 
+builder.Services.AddScoped<IValidator<CreateSharedNoteDto>, CreateSharedNoteValidator>();
+builder.Services.AddScoped<IValidator<UpdateSharedNoteDto>, UpdateSharedNoteValidator>();
 
 builder.Services.AddControllers().AddFluentValidation(x => {
     x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
