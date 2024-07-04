@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookApp.DtoLayer.Book;
+using BookApp.DtoLayer.BookNote;
 using BookApp.DtoLayer.Order;
 using BookApp.DtoLayer.ShelfLocation;
 using BookApp.EntityLayer.Concrete;
@@ -25,6 +26,11 @@ namespace BookApp.WebApi.Mapping
             CreateMap<UpdateOrderDto, Order>().ReverseMap();
             CreateMap<GetByIdOrderDto, Order>().ReverseMap();
             CreateMap<ResultOrderDto, Order>().ReverseMap();
+
+            CreateMap<CreateBookNoteDto, BookNote>().ReverseMap();
+            CreateMap<UpdateBookNoteDto, BookNote>().ReverseMap();
+            CreateMap<GetByIdBookNoteDto, BookNote>().ReverseMap();
+            CreateMap<ResultBookNoteDto, BookNote>().ReverseMap();
 
         }
 

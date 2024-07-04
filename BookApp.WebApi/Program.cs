@@ -1,6 +1,7 @@
 using BookApp.BusinessLayer.Abstract;
 using BookApp.BusinessLayer.Concrete;
 using BookApp.BusinessLayer.Serilog;
+using BookApp.BusinessLayer.Validators.BookNoteValidators;
 using BookApp.BusinessLayer.Validators.BookValidators;
 using BookApp.BusinessLayer.Validators.OrderValidators;
 using BookApp.BusinessLayer.Validators.ShelfLocationValidators;
@@ -9,6 +10,7 @@ using BookApp.DataAccessLayer.Context;
 using BookApp.DataAccessLayer.EntityFramework;
 using BookApp.DataAccessLayer.UnitOfWork;
 using BookApp.DtoLayer.Book;
+using BookApp.DtoLayer.BookNote;
 using BookApp.DtoLayer.Order;
 using BookApp.DtoLayer.ShelfLocation;
 using FluentValidation;
@@ -40,6 +42,9 @@ builder.Services.AddScoped<IBookService, BookManager>();
 builder.Services.AddScoped<IOrderDal, EfOrderDal>();
 builder.Services.AddScoped<IOrderService, OrderManager>();
 
+builder.Services.AddScoped<IBookNoteDal, EfBookNoteDal>();
+builder.Services.AddScoped<IBookNoteService, BookNoteManager>();
+
 builder.Services.AddScoped<IUowDal, UowDal>();
 
 
@@ -54,6 +59,9 @@ builder.Services.AddScoped<IValidator<UpdateBookDto>, UpdateBookValidator>();
 
 builder.Services.AddScoped<IValidator<CreateOrderDto>, CreateOrderValidator>();
 builder.Services.AddScoped<IValidator<UpdateOrderDto>, UpdateOrderValidator>();
+
+builder.Services.AddScoped<IValidator<CreateBookNoteDto>, CreateBookNoteValidator>();
+builder.Services.AddScoped<IValidator<UpdateBookNoteDto>, UpdateBookNoteValidator>();
 
 builder.Services.AddControllers().AddFluentValidation(x => {
     x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
