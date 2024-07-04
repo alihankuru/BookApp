@@ -57,7 +57,7 @@ namespace BookApp.WebApi.Controllers
 
 
 
-        [HttpDelete("DeleteDestination/{id}")]
+        [HttpDelete("DeleteShelfLocation/{id}")]
         public IActionResult DeleteShelfLocation(int id)
         {
             _shelfLocationService.TDelete(id);

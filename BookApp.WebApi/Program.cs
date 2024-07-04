@@ -1,11 +1,15 @@
 using BookApp.BusinessLayer.Abstract;
 using BookApp.BusinessLayer.Concrete;
 using BookApp.BusinessLayer.Serilog;
+using BookApp.BusinessLayer.Validators.BookValidators;
+using BookApp.BusinessLayer.Validators.OrderValidators;
 using BookApp.BusinessLayer.Validators.ShelfLocationValidators;
 using BookApp.DataAccessLayer.Abstract;
 using BookApp.DataAccessLayer.Context;
 using BookApp.DataAccessLayer.EntityFramework;
 using BookApp.DataAccessLayer.UnitOfWork;
+using BookApp.DtoLayer.Book;
+using BookApp.DtoLayer.Order;
 using BookApp.DtoLayer.ShelfLocation;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -29,6 +33,13 @@ builder.Services.AddDbContext<BookContext>();
 
 builder.Services.AddScoped<IShelfLocationDal, EfShelfLocationDal>();
 builder.Services.AddScoped<IShelfLocationService, ShelfLocationManager>();
+
+builder.Services.AddScoped<IBookDal, EfBookDal>();
+builder.Services.AddScoped<IBookService, BookManager>();
+
+builder.Services.AddScoped<IOrderDal, EfOrderDal>();
+builder.Services.AddScoped<IOrderService, OrderManager>();
+
 builder.Services.AddScoped<IUowDal, UowDal>();
 
 
@@ -37,6 +48,12 @@ builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddScoped<IValidator<CreateShelfLocationDto>, CreateShelfLocationValidator>();
 builder.Services.AddScoped<IValidator<UpdateShelfLocationDto>, UpdateShelfLocationValidator>();
+
+builder.Services.AddScoped<IValidator<CreateBookDto>, CreateBookValidator>();
+builder.Services.AddScoped<IValidator<UpdateBookDto>, UpdateBookValidator>();
+
+builder.Services.AddScoped<IValidator<CreateOrderDto>, CreateOrderValidator>();
+builder.Services.AddScoped<IValidator<UpdateOrderDto>, UpdateOrderValidator>();
 
 builder.Services.AddControllers().AddFluentValidation(x => {
     x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
