@@ -19,7 +19,7 @@ Bu projenin amacı, kitapların arşivlenmesi, satışının yapılması ve kull
 9. **Swagger/OpenAPI**: API dokümantasyonu oluşturmak için kullanılan araçlar.
 10. **JWT (JSON Web Token)**: Kimlik doğrulama ve yetkilendirme işlemleri için kullanılan standart.
 
-#BookApp.Api
+# BookApp.Api
 
 ![BookApp.Api](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a1.png)
 
@@ -27,13 +27,13 @@ Bu projenin amacı, kitapların arşivlenmesi, satışının yapılması ve kull
 ![BookApp.Api_Jwt](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a2.png)
 ![BookApp.Api_Jwt](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a3.png)
 
-#BookApp.Api_FluentValidation
+# BookApp.Api_FluentValidation
 ![BookApp.Api_FluentValidation](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a4.png)
 
-#BookApp.Api_SeriLog
+# BookApp.Api_SeriLog
 ![BookApp.Api_SeriLog](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a5.png)
 
-#BookApp.Api_Xunit
+# BookApp.Api_Xunit
 ![BookApp.Api_Xunit](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a6.png)
 
 # Kurulum
