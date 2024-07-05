@@ -23,18 +23,18 @@ Bu projenin amacı, kitapların arşivlenmesi, satışının yapılması ve kull
 
 ![BookApp.Api](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a1.png)
 
-#BookApp.Api Jwt
-![BookApp.Api Jwt](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a2.png)
-![BookApp.Api Jwt](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a3.png)
+#BookApp.Api_Jwt
+![BookApp.Api_Jwt](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a2.png)
+![BookApp.Api_Jwt](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a3.png)
 
-#BookApp.Api FluentValidation
-![BookApp.Api Jwt](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a4.png)
+#BookApp.Api_FluentValidation
+![BookApp.Api_FluentValidation](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a4.png)
 
-#BookApp.Api SeriLog
-![BookApp.Api SeriLog](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a5.png)
+#BookApp.Api_SeriLog
+![BookApp.Api_SeriLog](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a5.png)
 
-#BookApp.Api Xunit
-![BookApp.Api SeriLog](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a6.png)
+#BookApp.Api_Xunit
+![BookApp.Api_Xunit](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a6.png)
 
 # Kurulum
 
