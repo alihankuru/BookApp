@@ -23,7 +23,7 @@ Bu projenin amacı, kitapların arşivlenmesi, satışının yapılması ve kull
 
 ![BookApp.Api](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a1.png)
 
-#BookApp.Api_Jwt
+# BookApp.Api_Jwt
 ![BookApp.Api_Jwt](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a2.png)
 ![BookApp.Api_Jwt](https://github.com/alihankuru/BookApp/blob/master/BookApp.WebApi/Images/a3.png)
 
