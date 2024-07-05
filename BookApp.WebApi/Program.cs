@@ -1,5 +1,7 @@
 using BookApp.BusinessLayer.Abstract;
 using BookApp.BusinessLayer.Concrete;
+using BookApp.BusinessLayer.Contracts;
+using BookApp.BusinessLayer.Repositories;
 using BookApp.BusinessLayer.Serilog;
 using BookApp.BusinessLayer.Validators.BookNoteValidators;
 using BookApp.BusinessLayer.Validators.BookValidators;
@@ -17,11 +19,17 @@ using BookApp.DtoLayer.Order;
 using BookApp.DtoLayer.OrderItem;
 using BookApp.DtoLayer.SharedNote;
 using BookApp.DtoLayer.ShelfLocation;
+using BookApp.EntityLayer.Concrete;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using SharedNoteApp.BusinessLayer.Concrete;
+using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +42,31 @@ builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 
 builder.Services.AddSingleton(typeof(IAppLogger<>), typeof(AppLogger<>));
+
+//Add Jwt authectication
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<BookContext>()
+    .AddSignInManager()
+    .AddRoles<IdentityRole>();
+
+// Jwt
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options => {
+    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateIssuerSigningKey = true,
+        ValidateLifetime = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"], // Corrected this line
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+    };
+});
+
 
 
 builder.Services.AddDbContext<BookContext>();
@@ -57,7 +90,7 @@ builder.Services.AddScoped<ISharedNoteDal, EfSharedNoteDal>();
 builder.Services.AddScoped<ISharedNoteService, SharedNoteManager>();
 
 builder.Services.AddScoped<IUowDal, UowDal>();
-
+builder.Services.AddScoped<IUserAccount, AccountRepository>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
@@ -86,7 +119,17 @@ builder.Services.AddControllers().AddFluentValidation(x => {
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("oauth2", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        In=Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Name="Authorization",
+        Type=Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey
+    });
+
+    options.OperationFilter<SecurityRequirementsOperationFilter>();
+});
 
 var app = builder.Build();
 
@@ -99,6 +142,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

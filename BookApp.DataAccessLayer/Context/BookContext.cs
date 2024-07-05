@@ -1,4 +1,5 @@
 ﻿using BookApp.EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookApp.DataAccessLayer.Context
 {
-    public class BookContext : DbContext
+    public class BookContext : IdentityDbContext<ApplicationUser>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -20,6 +21,7 @@ namespace BookApp.DataAccessLayer.Context
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<SharedNote> SharedNotes { get; set; }
         public DbSet<ShelfLocation> ShelfLocations { get; set; }
+
 
     }
 }

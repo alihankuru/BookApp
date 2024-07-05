@@ -7,6 +7,7 @@ using BookApp.DtoLayer.Order;
 using BookApp.BusinessLayer.Validators.BookValidators;
 using BookApp.DtoLayer.Book;
 using BookApp.EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OrderApp.WebApi.Controllers
 {
@@ -28,6 +29,7 @@ namespace OrderApp.WebApi.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles ="User")]
         public IActionResult OrderList()
         {
             var orders = _orderService.TGetList();
@@ -36,6 +38,7 @@ namespace OrderApp.WebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateOrder(CreateOrderDto createOrderDto)
         {
             var validatorResult = _createOrderValidator.Validate(createOrderDto);
